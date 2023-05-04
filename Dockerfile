@@ -64,7 +64,9 @@ FROM --platform=linux/amd64 python:3.8-alpine3.17 as final
 
 WORKDIR /app
 
-RUN apk --no-cache add groff libc6-compat git && rm -rf /var/cache/apk/*
+RUN apk --no-cache add groff libc6-compat git && \
+    rm -rf /var/cache/apk/* && addgroup -S runner && \
+    adduser -S runner -G runner
 
 COPY --from=builder /binaries/bin/* /usr/local/bin/
 
@@ -74,5 +76,4 @@ ENV PATH="/opt/aws-cli/bin:${PATH}"
 
 ENTRYPOINT ["/usr/local/bin/task"]
 
-
-
+USER runner
