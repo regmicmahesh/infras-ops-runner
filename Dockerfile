@@ -72,7 +72,7 @@ COPY --from=aws-builder /opt/aws-cli/ /opt/aws-cli/
 
 ENV PATH="/opt/aws-cli/bin:${PATH}"
 
-ENTRYPOINT ["/usr/local/bin/just"]
+ENTRYPOINT ["/usr/local/bin/task"]
 
 
 
