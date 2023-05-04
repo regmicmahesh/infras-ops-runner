@@ -64,7 +64,7 @@ FROM --platform=linux/amd64 python:3.8-alpine3.17 as final
 
 WORKDIR /app
 
-RUN apk --no-cache add groff libc6-compat && rm -rf /var/cache/apk/*
+RUN apk --no-cache add groff libc6-compat git && rm -rf /var/cache/apk/*
 
 COPY --from=builder /binaries/bin/* /usr/local/bin/
 
