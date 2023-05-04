@@ -43,11 +43,11 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECT
         mv kubectl ./bin
 
 
-# Install just
-RUN curl -L https://github.com/casey/just/releases/download/1.13.0/just-${JUST_VERSION}-x86_64-unknown-linux-musl.tar.gz -o just.tar.gz && \
-        tar -xvf just.tar.gz && \
-        chmod +x ./just && \
-        mv just ./bin
+# Install task
+RUN curl -L https://github.com/go-task/task/releases/download/v3.24.0/task_linux_amd64.tar.gz -o task.tar.gz && \
+        tar -xvf task.tar.gz && \
+        chmod +x ./task && \
+        mv task ./bin
 
 # Install gomplate
 RUN curl -L https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-amd64 -o gomplate && \
@@ -61,6 +61,8 @@ RUN curl -L https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq
 
 
 FROM --platform=linux/amd64 python:3.8-alpine3.17 as final
+
+WORKDIR /app
 
 RUN apk --no-cache add groff && rm -rf /var/cache/apk/*
 
